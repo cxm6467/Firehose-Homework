@@ -20,16 +20,16 @@ class Image
     @img.map { | row | row.map { |cell| cell } }  
   end
 
-  def blur
+  def blur(distance)
     copy = copy_image
 
     @img.each_with_index do |row, row_index|
       row.each_with_index do |cell, col_index|
         next unless cell == 1
-          copy[row_index -1][col_index] = 1  unless row_index == 0             ## Up    --
-          copy[row_index +1][col_index] = 1  unless row_index + 1 >= @img.size ## Down  -- Bottom
-          copy[row_index][col_index -1] = 1  unless col_index == 0             ## Left  --
-          copy[row_index][col_index +1] = 1  unless col_index + 1 >= row.size  ## Right -- Right Edge
+          copy[(row_index -1)..distance][col_index] = 1  unless row_index == 0             ## Up    --
+          copy[(row_index +1)..distance][col_index] = 1  unless row_index + 1 >= @img.size ## Down  -- Bottom
+          copy[row_index][(col_index -1)..distance] = 1  unless col_index == 0             ## Left  --
+          copy[row_index][(col_index +1)..distance] = 1  unless col_index + 1 >= row.size  ## Right -- Right Edge
        end
     end
     @img = copy
@@ -38,16 +38,16 @@ end
 
 
 image = Image.new([
+  [0, 0, 0, 1],
   [0, 0, 0, 0],
-  [0, 0, 0, 0],
-  [0, 0, 0, 0],
-  [0, 0, 0, 1]
+  [0, 1, 0, 0],
+  [0, 0, 0, 0]
   ])
 
 
 image.output_image
 puts "next step"
-image.blur
+image.blur(3)
 puts "Blured"
 image.output_image
 
