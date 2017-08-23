@@ -19,25 +19,25 @@ class Image
     @img.map { | row | row.map { |cell| cell } }  
   end
 
-  def blur(distance)
+  def blur(_distance)
+    distance = _distance + 1
     copy = copy_image
     puts"Distance:  #{distance}"
     @img.each_with_index do |row, row_index|
       row.each_with_index do |cell, col_index|
         next unless cell == 1
 
+          ## "Straight distances"
           distance.times { |x|  copy[row_index -x][col_index] = 1 unless row_index == 0 }              ## Up
-          distance.times { |x|  copy[row_index +x][col_index] = 1 unless row_index + 1 >= @img.size }  ## Bottom
+          distance.times { |x|  copy[row_index +x][col_index] = 1 unless row_index + 1 >= @img.size }  ## Down
           distance.times { |x|  copy[row_index][col_index -x] = 1 unless col_index == 0   }            ## Left
           distance.times { |x|  copy[row_index][col_index +x] = 1 unless col_index + 1 >= row.size}    ## Right
 
-
-          ## Diagonals  [This probably doesn't work]
-          # copy[(row_index -1)..distance][col_index..distance] = 1  unless row_index == 0             ## Diagonal Up    --
-          # copy[(row_index +1)..distance][col_index..distance] = 1  unless row_index + 1 >= @img.size ## Diagonal Down  -- Bottom
-          # copy[row_index][(col_index -1..distance)..distance] = 1  unless col_index == 0             ## Diagonal Left  --
-          # copy[row_index][(col_index +1..distance)..distance] = 1  unless col_index + 1 >= row.size  ## Diagonal Right -- Right Edge
-
+          ## Diagonals  [
+          distance.times { |x| copy[row_index -x][col_index-x] = 1 unless col_index == 0 || row_index + 1 >= @img.size }            ## Down and to the left
+          distance.times { |x| copy[row_index -x][col_index+x] = 1 unless col_index + 1 >= row.size || row_index + 1 >= @img.size}  ## Down and to the right 
+          distance.times { |x| copy[row_index +x][col_index-x] = 1 unless col_index == 0 || row_index == 0 }                        ## Up and to the left 
+          distance.times { |x| copy[row_index +x][col_index+x] = 1 unless col_index + 1 >= row.size || row_index == 0 }             ## Up and to the right  
        end
     end
     @img = copy
@@ -46,7 +46,7 @@ end
 
 
 image = Image.new([
-  [0, 0, 0, 1],
+  [0, 0, 0, 0],
   [0, 0, 0, 0],
   [0, 1, 0, 0],
   [0, 0, 0, 0]
@@ -58,7 +58,7 @@ image.output_image
 puts "---"
 puts "next step"
 puts "---"
-image.blur(3)
+image.blur(1)
 puts "Blured"
 puts "---"
 image.output_image
