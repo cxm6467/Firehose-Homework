@@ -3,7 +3,7 @@ class LinkedListNode
 
   def initialize(value, next_node=nil)
     @value = value
-    @next_noed = next_node
+    @next_node = next_node
   end
 end
 
