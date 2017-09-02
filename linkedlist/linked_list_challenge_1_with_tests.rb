@@ -19,7 +19,7 @@ def print_values(list_node)
   end
 end
 
-## Stack to help reverse a list
+## Stack to help reverse a given list
 class Stack
     attr_reader :data
 
