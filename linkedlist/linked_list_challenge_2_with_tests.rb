@@ -19,44 +19,15 @@ def print_values(list_node)
   end
 end
 
-## Stack to help reverse a given list
-class Stack
-    attr_reader :top
-
-    def initialize
-        @top = nil
+def reverse_list(list, previous=nil)
+  # do stuff
+    while list != nil
+        old_node = list.next_node
+        list.next_node = previous
+        previous = list
+        list = old_node
     end
-
-    # Push a value onto the stack
-    def push(value)
-        # IMPLEMENT ME!
-        @top = LinkedListNode.new(value, @top)
-    end
-
-    # Pop an item off the stack.
-    # Remove the last item that was pushed onto the
-    # stack and return the value to the user
-    def pop
-        # I RETURN A VALUE
-        return nil if @top.nil?
-        original_top = @top.value
-        @top = @top.next_node
-        original_top
-    end
-end
-
-## Reverse a given list
-def reverse_list(list)
-    # ADD CODE HERE
-    reversed = Stack.new
-
-    while list
-        # ADD CODE HERE
-        reversed.push(list.value) unless list == nil
-        list = list.next_node
-    end
-    # ADD CODE HERE
-    reversed.top
+    previous
 end
 
 node1 = LinkedListNode.new(37)
