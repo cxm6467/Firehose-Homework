@@ -48,27 +48,26 @@ end
 ## Reverse a given list
 def reverse_list(list)
     # ADD CODE HERE
-    stack = Stack.new
+    reversed = Stack.new
 
     while list
         # ADD CODE HERE
-        stack.push(list.value)
+        reversed.push(list.value) unless list == nil
         list = list.next_node
     end
-
     # ADD CODE HERE
-    puts "Snack Stack #{stack}"
+    reversed.top
 end
 
 node1 = LinkedListNode.new(37)
 node2 = LinkedListNode.new(99, node1)
 node3 = LinkedListNode.new(12, node2)
-
-print_values(node3)
+node4 = LinkedListNode.new(11, node3)
+print_values(node4)
 
 puts "-------"
 
-revlist = reverse_list(node3)
+revlist = reverse_list(node4)
 
 print_values(revlist)
 
