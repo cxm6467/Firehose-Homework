@@ -3,24 +3,57 @@
   </head>
   <body>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script>
-      
-    </script>
+    <script src="jquery.countdown.min.js"></script>
     <script>
 
     $(function (){
 
       h2E = $("h2")
+      button = $("#button")
 
       h2E.click(function (){
+          $.get( "http://www.catfact.info/api/v1/facts.json?page=1&per_page=10", function( data ) {
 
-        h2E.html("I just got clicked.");
-      
+            var details = data.facts
+            h2E.html(details[3].details)
+
+          });
+      });
+
+      button.click(function(){
+          var detail = $("#detail");
+          var value = detail.val();
+          var fact = {
+                      "fact" : {
+                      "details" : value
+                                }
+
+                      }
+
+          $.post( "http://www.catfact.info//api/v1/facts.json", fact, function( data ) {
+              console.log(data)
+          });
+
       });
     });
+
+
 
     </script>
     <h1 class="headLine">Hello</h1>
     <h2 class="headLine">Goodbye :( </h2>
+    <hr>
+    <span>DetAil:  </span><input id="detail" />
+    <button id="button">ButT</button>
+    <hr>
+    <div id="getting-started"></div>
+    <script type="text/javascript">
+      $("#getting-started")
+      .countdown("2018/01/01", function(event) {
+        $(this).text(
+          event.strftime('%D days %H:%M:%S')
+        );
+      });
+    </script>
   </body>
 </html>
