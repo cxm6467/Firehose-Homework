@@ -4,14 +4,23 @@
   <body>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script>
-      pageHasLoaded = function (){
-      var sum = 1+1;
-      alert(sum);
-    };
-
-    $(pageHasLoaded);
-    
+      
     </script>
-    <h1>Hello</h1>
+    <script>
+
+    $(function (){
+
+      h2E = $("h2")
+
+      h2E.click(function (){
+
+        h2E.html("I just got clicked.");
+      
+      });
+    });
+
+    </script>
+    <h1 class="headLine">Hello</h1>
+    <h2 class="headLine">Goodbye :( </h2>
   </body>
 </html>
