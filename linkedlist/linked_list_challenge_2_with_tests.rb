@@ -22,13 +22,14 @@ end
 def reverse_list(list, previous=nil)
   # do stuff
     while list != nil
-        old_node = list.next_node
-        list.next_node = previous
-        previous = list
-        list = old_node
+        old_node = list.next_node  
+        list.next_node = previous  
+        previous = list            
+        list = old_node            
     end
     previous
 end
+
 
 node1 = LinkedListNode.new(37)
 node2 = LinkedListNode.new(99, node1)
