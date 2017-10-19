@@ -20,7 +20,6 @@ shallow_fifth_node = Tree.new(5, [ninth_node])
 
 # The "Trunk" of the tree
 trunk = Tree.new(2, [seventh_node, shallow_fifth_node])
-# @tree = []
 
 def traverse(node)
   node.children.each do |n|
@@ -32,6 +31,4 @@ def traverse(node)
     end
   end
 end
-
-# @tree.each { |x| puts x }
 traverse(trunk)
