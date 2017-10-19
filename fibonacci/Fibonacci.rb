@@ -1,14 +1,14 @@
 def recursive_fib(n)
-   if n == 1 || n == 2 
-    return 1
+  if n == 1 || n == 2
+    1
   else
-    recursive_fib(n - 1)+recursive_fib(n - 2)
-  end
+    recursive_fib(n - 1) + recursive_fib(n - 2)
+ end
 end
 
 def iterative_fib(n)
-  if n == 1 || n == 2 
-    return 1
+  if n == 1 || n == 2
+    1
   else
     previous_value = 0
     current_value = 1
@@ -18,7 +18,7 @@ def iterative_fib(n)
       previous_value = current_value
       current_value = interim + current_value
     end
-    return previous_value
+    previous_value
   end
 end
 
