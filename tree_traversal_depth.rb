@@ -1,18 +1,9 @@
 class Tree
-  attr_accessor :payload, :children, :visited
+  attr_accessor :payload, :children
 
   def initialize(payload, children)
     @payload = payload
     @children = children
-    @visited = false
-  end
-
-  def visited?
-    @visited
-  end
-
-  def children?
-    children.any?
   end
 end
 
@@ -29,16 +20,18 @@ shallow_fifth_node = Tree.new(5, [ninth_node])
 
 # The "Trunk" of the tree
 trunk = Tree.new(2, [seventh_node, shallow_fifth_node])
+# @tree = []
 
 def traverse(node)
-  while node.visited? == false
-    next unless node.children?
-    unless node.visited?
-      node.visited = true
-      traverse(node)
+  node.children.each do |n|
+    puts n.payload
+    next unless n.payload == 11
+    unless n.nil?
+      puts n.payload
+      traverse(n)
     end
-    puts node.payload
   end
 end
 
+# @tree.each { |x| puts x }
 traverse(trunk)
