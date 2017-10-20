@@ -1,9 +1,10 @@
 class Tree
-  attr_accessor :payload, :children
+  attr_accessor :payload, :children, :checked
 
   def initialize(payload, children)
     @payload = payload
     @children = children
+    @checked = false
   end
 end
 
@@ -23,12 +24,11 @@ trunk = Tree.new(2, [seventh_node, shallow_fifth_node])
 
 def traverse(node)
   node.children.each do |n|
-    puts n.payload
-    next unless n.payload == 11
-    unless n.nil?
-      puts n.payload
-      traverse(n)
-    end
+    # n.checked = true
+    traverse(n) unless n.nil?
+    # puts "#{n.payload} is not 11" unless n.payload.to_i == 11
+    next unless n.payload.to_i == 11
+    puts "Found it!  #{n.payload}"
   end
 end
 traverse(trunk)
