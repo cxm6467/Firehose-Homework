@@ -23,12 +23,12 @@ shallow_fifth_node = Tree.new(5, [ninth_node])
 trunk = Tree.new(2, [seventh_node, shallow_fifth_node])
 
 def traverse(node)
+  puts "+-+-+- >> Starting from #{node.payload}"
   node.children.each do |n|
-    # n.checked = true
-    traverse(n) unless n.nil?
-    # puts "#{n.payload} is not 11" unless n.payload.to_i == 11
-    next unless n.payload.to_i == 11
-    puts "Found it!  #{n.payload}"
+    n.checked = true
+    traverse(n)
+    puts "Value: #{n.payload}, Checked? #{n.checked}" unless n.payload == 11
+    puts "<###>Found it! Found 11" if n.checked && n.payload == 11
   end
 end
 traverse(trunk)
