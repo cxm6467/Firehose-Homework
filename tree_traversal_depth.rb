@@ -1,10 +1,9 @@
 class Tree
-  attr_accessor :payload, :children, :checked
+  attr_accessor :payload, :children
 
   def initialize(payload, children)
     @payload = payload
     @children = children
-    @checked = false
   end
 end
 
@@ -22,13 +21,14 @@ shallow_fifth_node = Tree.new(5, [ninth_node])
 # The "Trunk" of the tree
 trunk = Tree.new(2, [seventh_node, shallow_fifth_node])
 
-def traverse(node)
-  node.children.each do |n|
-    # n.checked = true
-    traverse(n) unless n.nil?
-    # puts "#{n.payload} is not 11" unless n.payload.to_i == 11
-    next unless n.payload.to_i == 11
-    puts "Found it!  #{n.payload}"
+def traverse(node, payload_to_find)
+  return node if node.payload == payload_to_find
+  node.children.each do |child|
+    is_found = traverse(child,payload_to_find)
+    return is_found unless is_found.nil?
   end
+  return nil
 end
-traverse(trunk)
+puts traverse(trunk, 11) == eleventh_node
+puts traverse(trunk, 5) == deep_fifth_node
+puts traverse(trunk, nil).nil?
