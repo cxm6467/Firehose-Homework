@@ -1,10 +1,20 @@
 class Tree
-  attr_accessor :payload, :children, :checked
+  attr_accessor :payload, :children
 
   def initialize(payload, children)
     @payload = payload
     @children = children
-    @checked = false
+  end
+
+  def traverse
+    # puts "Payload  #{@payload}"
+    return self if @payload == 11
+    @children.each { |child| return child.traverse unless nil? }
+    # Can't I combine the following to
+    # return child.traverse unless nil?
+    # var = child.traverse
+    # return var unless nil?
+    # end
   end
 end
 
@@ -21,14 +31,4 @@ shallow_fifth_node = Tree.new(5, [ninth_node])
 
 # The "Trunk" of the tree
 trunk = Tree.new(2, [seventh_node, shallow_fifth_node])
-
-def traverse(node)
-  puts "+-+-+- >> Starting from #{node.payload}"
-  node.children.each do |n|
-    n.checked = true
-    traverse(n)
-    puts "Value: #{n.payload}, Checked? #{n.checked}" unless n.payload == 11
-    puts "<###>Found it! Found 11" if n.checked && n.payload == 11
-  end
-end
-traverse(trunk)
+puts trunk.payload
