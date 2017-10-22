@@ -7,7 +7,7 @@ class Tree
   end
 
   def traverse
-    # puts "Payload  #{@payload}"
+    puts "Payload  #{@payload}"
     return self if @payload == 11
     @children.each { |child| return child.traverse unless nil? }
     # Can't I combine the following to
@@ -15,6 +15,7 @@ class Tree
     # var = child.traverse
     # return var unless nil?
     # end
+    return nil
   end
 end
 
@@ -31,4 +32,4 @@ shallow_fifth_node = Tree.new(5, [ninth_node])
 
 # The "Trunk" of the tree
 trunk = Tree.new(2, [seventh_node, shallow_fifth_node])
-puts trunk.payload
+puts trunk.traverse
