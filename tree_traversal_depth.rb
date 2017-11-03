@@ -7,7 +7,7 @@ class Tree
   end
 end
 
-# The "Leafs" of a tree, elements that have no children
+# The "Leaves" of a tree, elements that have no children
 deep_fifth_node = Tree.new(5, [])
 eleventh_node = Tree.new(11, [])
 fourth_node   = Tree.new(4, [])
