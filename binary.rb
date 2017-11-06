@@ -14,20 +14,53 @@ end
 ## build an array to sort and return :)
 class BTreeSort
   def self.sort(array)
+    trunk = build_tree(array)
+    sort_tree(trunk)
+  end
+
+  def self.build_tree(array)
     trunk = BinaryTree.new(array[0], nil, nil)
-    array.each do |element|
-      if element > trunk.payload
-        trunk.right = BinaryTree.new(element, trunk, nil)
-      else
-        trunk.left = BinaryTree.new(trunk, element, nil)
-      end
+    array[1..-1].each do |payload|
+      ## Place element in tree
+      put_payload_in_tree(trunk, payload)
     end
-    puts trunk.payload
-    if trunk.right
-      puts trunk.right
-    elsif trunk.left
-      puts trunk.left
+    trunk
+  end
+
+  def self.put_payload_in_tree(node, payload)
+    ## if the payload is greater or less than the trunks payload
+    ## set left or right values
+    if payload > node.payload
+      # trunk.right = BinaryTree.new(payload, nil, nil)
+      put_payload_on_the_right(node, payload)
+    else
+      put_payload_on_the_left(node, payload)
     end
+  end
+
+  def self.put_payload_on_the_right(node, payload)
+    if node.right.nil?
+      node.right = BinaryTree.new(payload, nil, nil)
+    else
+      put_payload_in_tree(node.right, payload)
+    end
+  end
+
+  def self.put_payload_on_the_left(node, payload)
+    if node.left.nil?
+      node.left = BinaryTree.new(payload, nil, nil)
+    else
+      put_payload_in_tree(node.left, payload)
+    end
+  end
+
+  def self.sort_tree(node, sorted_tree = [])
+
+    sort_tree(node.left, sorted_tree) if node.left
+    sorted_tree << node.payload
+    sort_tree(node.right, sorted_tree) if node.right
+
+    sorted_tree
   end
 end
 
